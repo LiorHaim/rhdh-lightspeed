@@ -1,0 +1,34 @@
+backend:
+  csp:
+     upgrade-insecure-requests: false
+   img-src:
+      - "'self'"
+      - "data:"
+      - https://img.freepik.com
+      - https://cdn.dribbble.com
+      - https://avatars.githubusercontent.com # This is to load GitHub avatars in the UI
+   script-src:
+       - "'self'"
+       - https://cdn.jsdelivr.net
+
+lightspeed:
+  # REQUIRED: Configure LLM servers with OpenAI API compatibility
+  servers:
+    - id: qwen3-8b-fp8
+      url: https://qwen3-8b-fp8-qwen3-8b.apps.cluster-vschl.vschl.sandbox286.opentlc.com/v1
+      token: ${LIGHTSPEED_TOKEN}
+  # OPTIONAL: Enable/disable question validation (default: true)
+  # When enabled, restricts questions to RHDH-related topics for better security
+  questionValidation: true
+
+  # OPTIONAL: Custom users prompts displayed to users
+  # If not provided, the plugin uses built-in default prompts
+  prompts:
+    - title: 'Getting Started with Red Hat Developer Hub'
+      message: Can you guide me through the first steps to start using Developer Hub as a developer, like exploring the Software Catalog and adding my service?
+
+  # OPTIONAL: Port for lightspeed service (default: 8080)
+  # servicePort: ${LIGHTSPEED_SERVICE_PORT}
+
+  # OPTIONAL: Override default RHDH system prompt
+  # systemPrompt: "You are a helpful assistant focused on Red Hat Developer Hub development."
