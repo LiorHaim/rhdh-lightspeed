@@ -1,15 +1,4 @@
 backend:
-  csp:
-     upgrade-insecure-requests: false
-   img-src:
-      - "'self'"
-      - "data:"
-      - https://img.freepik.com
-      - https://cdn.dribbble.com
-      - https://avatars.githubusercontent.com # This is to load GitHub avatars in the UI
-   script-src:
-       - "'self'"
-       - https://cdn.jsdelivr.net
 
 lightspeed:
   # REQUIRED: Configure LLM servers with OpenAI API compatibility
