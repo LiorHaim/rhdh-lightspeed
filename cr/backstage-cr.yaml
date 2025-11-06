@@ -1,0 +1,37 @@
+apiVersion: rhdh.redhat.com/v1alpha3
+kind: Backstage
+metadata:
+  name: developer-hub
+  namespace: rhdh-operator
+spec:
+  deployment:
+    patch:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: road-core-sidecar
+                image: "quay.io/redhat-ai-dev/road-core-service:rcs-06302025-rhdh-1.7"
+                env:
+                  - name: PROJECT
+                    value: rhdh
+                  - name: RCS_CONFIG_FILE
+                    value: /app-root/config/rcsconfig.yaml
+                  - name: RHDH_CONFIG_FILE
+                    value: /app-root/config/app-config-rhdh.yaml
+                ports:
+                  - name: rcs-backend
+                    containerPort: 8080
+                    protocol: TCP
+                volumeMounts:
+                  - name: rcsconfig
+                    mountPath: /app-root/config/rcsconfig.yaml
+                    subPath: rcsconfig.yaml
+                  - name: rhdh-custom-appconfig
+                    mountPath: /app-root/config/app-config-rhdh.yaml
+                    subPath: app-config.yaml
+
+            volumes:
+              - name: rcsconfig
+                configMap:
+                  name: rcsconfig
