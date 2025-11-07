@@ -6,7 +6,8 @@ data:
       # Start: Do not remove this block
       - name: qwen3
         type: openai
-        url: https://qwen3-8b-fp8-qwen3-8b.apps.cluster-vschl.vschl.sandbox286.opentlc.com/v1
+        # NOTE: This value comes from an environment variable and must end with /v1
+        url: ${LLM_ENDPOINT_URL}
         models:
           - name: qwen3-8b-fp8
       # End: Do not remove this block
